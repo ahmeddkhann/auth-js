@@ -35,7 +35,15 @@ export const authOptions = {
                 } catch (error) {
                     throw new error
                 }
-              }
-        })
+              },
+              pages: {
+                signin: "sign-in",
+                logout: "logout"
+              },
+              session: {
+                strategy: "jwt"
+              },
+              secret: process.env.AUTH_SECRET
+        }),
     ]
 }
