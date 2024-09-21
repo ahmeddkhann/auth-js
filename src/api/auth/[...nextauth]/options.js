@@ -43,7 +43,26 @@ export const authOptions = {
               session: {
                 strategy: "jwt"
               },
-              secret: process.env.AUTH_SECRET
+              secret: process.env.AUTH_SECRET,
+              callbacks: {
+                async jwt({ token, user }) {
+                    if (user){
+                        token._id = user._id
+                        token.username = user.username
+                        token.email = user.email
+                        token.phone = user.phone
+                    }
+                    return token
+                  },
+
+                async session({ session, token }) {
+                    session._id = token._id
+                    session.username = token.username
+                    session.email = token.email
+                    session.phone = token.phone
+                    return session
+                  }
+              }
         }),
     ]
 }
