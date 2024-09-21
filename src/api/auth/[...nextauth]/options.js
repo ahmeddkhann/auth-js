@@ -2,6 +2,7 @@ import connectDB from "@/dbconnection/connection";
 import { User } from "@/models/user.models";
 import bcrypt from "bcrypt"
 import CredentialsProvider from "next-auth/providers/credentials";
+import InstagramProvider from "next-auth/providers/instagram";
 
 export const authOptions = {
     provider: [
@@ -64,5 +65,13 @@ export const authOptions = {
                   }
               }
         }),
+        InstagramProvider({
+            clientId: process.env.INSTAGRAM_CLIENT_ID,
+            clientSecret: process.env.INSTAGRAM_CLIENT_SECRET
+          }),
+          LinkedInProvider({
+            clientId: process.env.LINKEDIN_CLIENT_ID,
+            clientSecret: process.env.LINKEDIN_CLIENT_SECRET
+          })
     ]
 }
